@@ -15584,16 +15584,16 @@ __webpack_require__.r(__webpack_exports__);
         if (modeCfg.highlightFormatting) state.formatting = ["list", "list-" + listType];
         return getType(state);
       } else if (firstTokenOnLine && state.indentation <= maxNonCodeIndentation && (match = stream.match(fencedCodeRE, true))) {
-          state.quote = 0;
-          state.fencedEndRE = new RegExp(match[1] + "+ *$"); // try switching mode
-  
-          state.localMode = modeCfg.fencedCodeBlockHighlighting && getMode(match[2]);
-          if (state.localMode) state.localState = CodeMirror.startState(state.localMode);
-          state.f = state.block = local;
-          if (modeCfg.highlightFormatting) state.formatting = "code-block";
-          state.code = -1;
-          return getType(state); // SETEXT has lowest block-scope precedence after HR, so check it after
-          //  the others (code, blockquote, list...)
+        state.quote = 0;
+        state.fencedEndRE = new RegExp(match[1] + "+ *$"); // try switching mode  
+
+        state.localMode = modeCfg.fencedCodeBlockHighlighting && getMode(match[2]);
+        if (state.localMode) state.localState = CodeMirror.startState(state.localMode);
+        state.f = state.block = local;
+        if (modeCfg.highlightFormatting) state.formatting = "code-block";
+        state.code = -1;
+        return getType(state); // SETEXT has lowest block-scope precedence after HR, so check it after
+        //  the others (code, blockquote, list...)
       } else if ( // if setext set, indicates line after ---/===
       state.setext || // line before ---/===
       (!allowsInlineContinuation || !prevLineIsList) && !state.quote && state.list === false && !state.code && !isHr && !linkDefRE.test(stream.string) && (match = stream.lookAhead(1)) && (match = match.match(setextHeaderRE))) {
